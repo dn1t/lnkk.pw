@@ -1,21 +1,22 @@
-// window.addEventListener('load', () =>
-//   new Darkmode({
-//     label: '🌓',
-//     time: '0s',
-//     autoMatchOsTheme: false,
-//   }).showWidget()
-// );
+const toggleAdvanced = (checked, isFirst) => {
+  Array.from(document.getElementsByClassName('advanced')).forEach((el) => {
+    if (checked) {
+      el.classList.remove('h-0', 'opacity-0');
+      el.classList.add('mt-2');
+    } else {
+      el.classList.remove('mt-2');
+      el.classList.add('h-0', 'opacity-0');
+    }
+
+    if (isFirst)
+      setTimeout(() => el.classList.add('transition-all', 'duration-500'), 10);
+  });
+};
 
 window.addEventListener('DOMContentLoaded', () => {
-  Array.from(document.getElementsByClassName('advanced')).forEach((el) =>
-    el.classList[document.getElementById('custom') ? 'remove' : 'add']('hidden')
-  );
+  const custom = document.getElementById('custom');
 
-  document
-    .getElementById('custom')
-    .addEventListener('click', (e) =>
-      Array.from(document.getElementsByClassName('advanced')).forEach((el) =>
-        el.classList[e.target.checked ? 'remove' : 'add']('hidden')
-      )
-    );
+  toggleAdvanced(custom.checked, true);
+
+  custom.addEventListener('click', (e) => toggleAdvanced(e.target.checked));
 });

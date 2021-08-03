@@ -15,85 +15,115 @@
 
   <body>
     <div class="h-screen bg-gray-50 flex flex-col">
-      <main
-        class="w-auto max-w-lg m-auto bg-white px-8 py-4 rounded-xl shadow-lg"
-      >
-        <h1 class="font-sans font-semibold text-3xl">lnkk.pw</h1>
-        <form id="form">
-          <label for="url" class="mt-1 block text-sm font-medium text-gray-700">
-            <span class="advanced hidden">단축할 URL</span>
-            <div class="relative rounded-md shadow-sm">
-              <input
-                type="url"
-                id="url"
-                class="
-                  focus:ring-indigo-500 focus:border-indigo-500
-                  block
-                  w-full
-                  sm:text-sm
-                  border-gray-300
-                  rounded-md
-                "
-                placeholder="https://example.com"
-              />
-            </div>
-          </label>
+      <main class="w-auto max-w-lg m-auto bg-white rounded-xl shadow-lg">
+        <div class="px-8 py-5">
+          <h1 class="font-sans font-semibold text-3xl">lnkk.pw</h1>
+          <form id="form">
+            <label
+              for="url"
+              class="mt-2 block text-sm font-medium text-gray-700"
+            >
+              <span class="advanced h-0 overflow-hidden opacity-0 block"
+                >단축할 URL</span
+              >
+              <div class="relative rounded-md shadow-sm">
+                <input
+                  type="url"
+                  id="url"
+                  class="
+                    focus:ring-indigo-500 focus:border-indigo-500
+                    block
+                    w-full
+                    sm:text-sm
+                    border-gray-300
+                    rounded-md
+                  "
+                  placeholder="https://example.com"
+                />
+              </div>
+            </label>
 
-          <label for="link" class="advanced hidden mt-1 text-sm font-medium text-gray-700">
-            <span>커스텀 링크</span>
-            <div class="relative rounded-md shadow-sm">
-              <input
-                type="url"
-                id="link"
+            <label
+              for="link"
+              class="
+                advanced
+                h-0
+                mt-2
+                overflow-hidden
+                opacity-0
+                block
+                text-sm
+                font-medium
+                text-gray-700
+              "
+            >
+              <span>커스텀 URL</span>
+              <div class="relative rounded-md shadow-sm">
+                <input
+                  type="url"
+                  id="link"
+                  class="
+                    focus:ring-indigo-500 focus:border-indigo-500
+                    block
+                    w-full
+                    sm:text-sm
+                    border-gray-300
+                    rounded-md
+                  "
+                  placeholder="https://example.com"
+                />
+              </div>
+            </label>
+            <label>
+              <input type="submit" class="hidden" value="단축" />
+              <button
+                id="shorten"
                 class="
-                  focus:ring-indigo-500 focus:border-indigo-500
-                  block
+                  inline-flex
+                  items-center
+                  justify-center
+                  px-4
+                  py-1.5
+                  mt-2
                   w-full
-                  sm:text-sm
-                  border-gray-300
+                  border border-transparent
+                  text-base
+                  font-medium
                   rounded-md
+                  text-white
+                  bg-indigo-600
+                  hover:bg-indigo-700
                 "
-                placeholder="https://example.com"
-              />
-            </div>
-          </label>
-
-          <div class="mt-2 space-y-4">
-            <div class="flex items-start">
+                role="button"
+              >
+                단축
+              </button>
+            </label>
+            <div class="flex items-start mt-2">
               <div class="flex items-center h-5">
-                <input id="custom" type="checkbox" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded">
+                <input
+                  id="custom"
+                  type="checkbox"
+                  class="
+                    focus:ring-transparent
+                    h-4
+                    w-4
+                    text-indigo-600
+                    border-gray-300
+                    rounded
+                  "
+                />
               </div>
               <div class="ml-2 text-sm">
-                <label for="custom" class="font-medium text-gray-700">커스텀 URL 설정</label>
+                <label for="custom" class="font-medium text-gray-700"
+                  >커스텀 URL 사용</label
+                >
               </div>
             </div>
-
-          <label>
-            <input type="submit" class="hidden" value="단축" />
-            <button id="shorten" class="darkmode-ignore" role="button">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="feather feather-chevron-right"
-              >
-                <polyline points="9 18 15 12 9 6"></polyline>
-              </svg>
-            </button>
-          </label>
-        </form>
-        <div class="about">
-          <h4>긴 URL을 짧게 단축하세요!</h4>
+          </form>
         </div>
       </main>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
     <script src="/index.js"></script>
   </body>
 </html>
