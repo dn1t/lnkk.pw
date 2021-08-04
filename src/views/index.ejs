@@ -7,23 +7,213 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap"
       rel="stylesheet"
     />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"
+    />
+    <link rel="stylesheet" href="/fonts.css" />
     <link rel="stylesheet" href="/styles.css" />
+    <style>
+      .toastify.error {
+        background: rgb(239, 68, 68) !important;
+        color: white !important;
+      }
+      .toastify.copied {
+        background: rgb(16, 185, 129) !important;
+        color: white !important;
+      }
+    </style>
   </head>
 
   <body>
+    <div
+      class="fixed z-10 inset-0 overflow-y-auto hidden"
+      aria-labelledby="modal-title"
+      role="dialog"
+      aria-modal="true"
+    >
+      <div
+        class="
+          flex
+          items-end
+          justify-center
+          min-h-screen
+          pt-4
+          px-4
+          pb-20
+          text-center
+          sm:block sm:p-0
+        "
+      >
+        <div
+          id="background"
+          class="
+            opacity-0
+            fixed
+            inset-0
+            bg-gray-500 bg-opacity-75
+            transition-opacity
+            duration-300
+          "
+          aria-hidden="true"
+        ></div>
+
+        <span
+          class="hidden sm:inline-block sm:align-middle sm:h-screen"
+          aria-hidden="true"
+          >&#8203;</span
+        >
+        <div
+          id="modal"
+          class="
+            opacity-0
+            translate-y-4
+            sm:scale-95 sm:translate-y-0
+            inline-block
+            align-bottom
+            bg-white
+            rounded-lg
+            text-left
+            overflow-hidden
+            shadow-xl
+            transform
+            transition-all
+            duration-300
+            sm:my-8 sm:align-middle sm:max-w-lg sm:w-full
+          "
+        >
+          <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+            <div class="sm:flex sm:items-start">
+              <div
+                class="
+                  mx-auto
+                  flex-shrink-0 flex
+                  items-center
+                  justify-center
+                  h-12
+                  w-12
+                  rounded-full
+                  bg-green-100
+                  sm:mx-0 sm:h-10 sm:w-10
+                "
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-6 w-6 text-green-600"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 13l4 4L19 7"
+                  />
+                </svg>
+              </div>
+              <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left w-full">
+                <h3
+                  class="text-lg leading-6 font-medium text-gray-900"
+                  id="modal-title"
+                >
+                  URL이 단축되었습니다!
+                </h3>
+                <div class="mt-2 w-full">
+                  <input
+                    type="url"
+                    id="result"
+                    class="
+                      focus:ring-indigo-500 focus:border-indigo-500
+                      block
+                      w-full
+                      sm:text-sm
+                      border-gray-300
+                      rounded-md
+                      placeholder-gray-300
+                    "
+                    placeholder="https://example.com"
+                    readonly
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+            <button
+              type="button"
+              class="
+                w-full
+                inline-flex
+                justify-center
+                rounded-md
+                border border-transparent
+                shadow-sm
+                px-4
+                py-2
+                bg-indigo-600
+                text-base
+                font-medium
+                text-white
+                hover:bg-indigo-700
+                focus:outline-none
+                sm:ml-3 sm:w-auto sm:text-sm
+              "
+              onclick="copyUrl()"
+            >
+              복사하고 닫기
+            </button>
+            <button
+              type="button"
+              class="
+                mt-3
+                w-full
+                inline-flex
+                justify-center
+                rounded-md
+                border border-gray-300
+                shadow-sm
+                px-4
+                py-2
+                bg-white
+                text-base
+                font-medium
+                text-gray-700
+                hover:bg-gray-50
+                focus:outline-none
+                sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm
+              "
+              onclick="toggleModal()"
+            >
+              닫기
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="h-screen bg-gray-50 flex flex-col">
-      <main class="w-auto max-w-lg m-auto bg-white rounded-xl shadow-lg">
+      <main class="w-screen max-w-sm m-auto bg-white rounded-xl shadow-lg">
         <div class="px-8 py-5">
-          <h1 class="font-sans font-semibold text-3xl">lnkk.pw</h1>
+          <h1 class="font-sans font-semibold text-3xl select-none mb-2">lnkk.pw</h1>
           <form id="form">
             <label
               for="url"
-              class="mt-2 block text-sm font-medium text-gray-700"
+              class="mt-1 block text-sm font-medium text-gray-700 p-px"
             >
-              <span class="advanced h-0 overflow-hidden opacity-0 block"
+              <span
+                class="
+                  advanced
+                  max-h-0
+                  overflow-hidden
+                  opacity-0
+                  block
+                  select-none
+                "
                 >단축할 URL</span
               >
               <div class="relative rounded-md shadow-sm">
@@ -37,6 +227,7 @@
                     sm:text-sm
                     border-gray-300
                     rounded-md
+                    placeholder-gray-300
                   "
                   placeholder="https://example.com"
                 />
@@ -46,9 +237,10 @@
             <label
               for="link"
               class="
+                p-px
                 advanced
-                h-0
-                mt-2
+                max-h-0
+                mt-1
                 overflow-hidden
                 opacity-0
                 block
@@ -57,20 +249,43 @@
                 text-gray-700
               "
             >
-              <span>커스텀 URL</span>
+              <span class="select-none">커스텀 URL</span>
               <div class="relative rounded-md shadow-sm">
+                <div
+                  class="
+                    absolute
+                    inset-y-0
+                    left-0
+                    my-px
+                    ml-px
+                    pl-3
+                    pr-1.5
+                    flex
+                    items-center
+                    pointer-events-none
+                    bg-gray-100 bg-opacity-70
+                    rounded-l-md
+                  "
+                >
+                  <span class="text-gray-500 font-medium sm:text-sm select-none"
+                    >lnkk.pw/</span
+                  >
+                </div>
                 <input
-                  type="url"
+                  type="text"
                   id="link"
+                  maxlength="12"
                   class="
                     focus:ring-indigo-500 focus:border-indigo-500
                     block
                     w-full
+                    pl-20
                     sm:text-sm
                     border-gray-300
                     rounded-md
+                    placeholder-gray-300
                   "
-                  placeholder="https://example.com"
+                  placeholder="tica"
                 />
               </div>
             </label>
@@ -84,7 +299,7 @@
                   justify-center
                   px-4
                   py-1.5
-                  mt-2
+                  mt-1.5
                   w-full
                   border border-transparent
                   text-base
@@ -114,8 +329,10 @@
                   "
                 />
               </div>
-              <div class="ml-2 text-sm">
-                <label for="custom" class="font-medium text-gray-700"
+              <div class="pl-2 text-sm">
+                <label
+                  for="custom"
+                  class="font-medium text-gray-700 select-none"
                   >커스텀 URL 사용</label
                 >
               </div>
@@ -124,6 +341,22 @@
         </div>
       </main>
     </div>
+    <div
+      class="
+        fixed
+        bottom-3
+        right-3
+        text-md text-gray-600
+        select-none
+        font-normal
+      "
+    >
+      부적절한 URL 단축 시 통보 없이 삭제될 수 있습니다.
+    </div>
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/toastify-js"
+    ></script>
     <script src="/index.js"></script>
   </body>
 </html>
